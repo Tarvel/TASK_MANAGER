@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<title> TAI'S BLOG </title>
+
+{% if current_user.is_authenticated %}
+    
+    {% if tasks %}
+        {% for task in tasks %}
+        
+            <h1>    
+            <li><a href="{{ url_for('actual_task', task_id=task.id) }}"> {{ task.task_name|title }}</a></li>
+            </h1>
+
+            <p>{{ task.task_description }}</p>
+            <br>
+            <br>
+        {% endfor %}
+
+    {% else %}
+        <h3><small> Welcome to Task Manager, Create a new Task today!</small></h3>
+    {% endif %}
+
+
+
+    <div (class="btn btn-outline-info")>
+        <a href='/create_task'> <button > Create Task </button> </a>
+    </div>
+
+{% else %}
+    <h1> Welcome to Task Manager</h1>
+    <p> <a href='/register'> Create an account today</a> or <a href='/login'> Login</a> </p>
+{% endif %}
+    
+{% endblock content %}
